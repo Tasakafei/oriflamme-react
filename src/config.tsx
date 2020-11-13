@@ -1,1 +1,1 @@
-export const WS_BASE = "ws://localhost:80";
+export const WS_BASE = "ws://oriflamme.herokuapp.com:80";
