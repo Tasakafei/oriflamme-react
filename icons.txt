@@ -1,0 +1,10 @@
+ASSASSIN : <i class="fas fa-user-ninja"></i>
+ARCHER <i class="fas fa-bow-arrow"></i>
+CHANGEFORME <i class="fas fa-splotch">
+COMPLOT <i class="fas fa-american-sign-language-interpreting"></i>
+SOLDAT <i class="fas fa-shield-alt"></i>
+DECRET ROYAL </i> <i class="fas fa-exchange-alt"></i>
+EMBUSCADE
+ESPION <i class="fas fa-user-secret"></i>
+HERITIER <i class="fas fa-crown"></i>
+SEIGNEUR <i class="fas fa-users"></i> 
