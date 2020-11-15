@@ -1,3 +1,5 @@
+import React from "react";
+
 export enum CardKindEnum {
     ASSASSINAT = "ASSASSINAT",
     CHANGEFORME = "CHANGEFORME",

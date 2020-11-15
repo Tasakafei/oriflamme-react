@@ -6,10 +6,12 @@ export const GAME_CREATED = "GAME_CREATED";
 export const CREATE_GAME = "CREATE_GAME";
 export const JOIN_GAME = "JOIN_GAME";
 export const LEAVE_GAME = "LEAVE_GAME";
+export const START_GAME = "START_GAME";
 export const PLAYER_JOINED_GAME = "PLAYER_JOINED_GAME";
 export const PLAYER_LEFT_GAME = "PLAYER_LEFT_GAME";
 export const GAME_DELETED = "GAME_DELETED";
-export const DISCONNECTED = "DISCONNECTED"
+export const GAME_STATUS = "GAME_STATUS";
+export const DISCONNECTED = "DISCONNECTED";
 export function loginRequest(name: string) {
     return {
         action: LOGIN,
@@ -33,6 +35,12 @@ export function joinGameRequest(gameName: any) {
 export function leaveGameRequest(gameName: any) {
     return {
         action: LEAVE_GAME,
+        gameName: gameName
+    }
+}
+export function startGameRequest(gameName: any) {
+    return {
+        action: START_GAME,
         gameName: gameName
     }
 }

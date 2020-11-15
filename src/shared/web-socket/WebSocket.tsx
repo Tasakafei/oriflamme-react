@@ -2,7 +2,7 @@ import { WS_BASE } from "../../config";
 import { useDispatch } from "react-redux";
 import React, {createContext} from "react";
 import {SESSION_TOKEN} from "./localStorage";
-import {createGameRequest, joinGameRequest, leaveGameRequest, loginRequest} from "./actions";
+import {createGameRequest, joinGameRequest, leaveGameRequest, loginRequest, startGameRequest} from "./actions";
 import {useToasts} from "react-toast-notifications";
 
 const WebSocketContext = createContext(null);
@@ -18,7 +18,8 @@ const SYSTEM_ERRORS = {
     PARAMETER_MISSING: (event:any) => "Le param "+event.parameter+" est manquant à l'action " + event.action,
     INVALID_JSON_SYNTAX: (event:any) => "Syntaxe JSON invalide : "+event.data,
     NO_SUCH_ACTION: (event:any) => "L'action "+event.action +" est inconnue",
-    NO_SUCH_LOGGED_PLAYER:  (event:any) => "L'utilisateur de sessionToken "+event.sessionToken +" est inconnu"
+    NO_SUCH_LOGGED_PLAYER:  (event:any) => "L'utilisateur de sessionToken "+event.sessionToken +" est inconnu",
+    NO_SUCH_GAME: (event:any) =>  "La partie " + event.gameName + " n'existe pas"
 
 };
 export default function ( {children}:any ) {
@@ -46,6 +47,9 @@ export default function ( {children}:any ) {
     };
     const leaveGame = (gameName: string) => {
         send(leaveGameRequest(gameName))
+    };
+    const startGame = (gameName: string) => {
+        send(startGameRequest(gameName))
     };
 
     if (!socket) {
@@ -79,7 +83,8 @@ export default function ( {children}:any ) {
             logout,
             createGame,
             joinGame,
-            leaveGame
+            leaveGame,
+            startGame
         }
     }
     return (

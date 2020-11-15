@@ -1,8 +1,8 @@
 import React, {useContext, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {WebSocketContext} from "../shared/web-socket/WebSocket";
+import {WebSocketContext} from "../../shared/web-socket/WebSocket";
 import {Badge, Button, Form} from "react-bootstrap";
-import {disconnectRequest} from "../shared/web-socket/actions";
+import {disconnectRequest} from "../../shared/web-socket/actions";
 
 function AuthenticationPage() {
     let usernameInput:string = "";

@@ -1,0 +1,94 @@
+.points-container {
+    position: fixed;
+    left: 0;
+    min-width: 100px;
+    top: 0;
+    height: 13%;
+    background-color: rebeccapurple;
+    font-size: calc(7px + 2vmin)
+}
+
+.hand-container {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    bottom: 0;
+    height: 25%;
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 10px;
+}
+
+.card {
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.board-container {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    top: 13%;
+    bottom: 25%;
+    background-color: brown;
+}
+
+.status-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    background-color: cornflowerblue;
+}
+
+.bg-purple {
+    background-color: purple !important;
+    color: white !important;
+}
+
+.game-card {
+    height: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.points-player-green {
+    background-color: green;
+}
+
+.points-player-yellow {
+    background-color: yellow;
+}
+
+.points-player-red {
+    background-color: orangered;
+}
+
+.points-player-black {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.points-player-blue {
+    background-color: #5b48ff;
+}
+
+.points-player-card {
+    z-index:100;
+    height: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.points-player-active {
+    border: 10px double white;
+}

@@ -7,7 +7,6 @@ import {IPhase} from "./IPhase";
 export interface IGameStatus {
     players: IGamePlayer[];
     hand: ICard;
-    // TODO Board
     board: IBoard;
     phase: IPhase;
     round: IRound;

@@ -4,11 +4,12 @@ import {
     PLAYER_JOINED_GAME,
     PLAYER_JOINED_LOBBY,
     DISCONNECTED,
-    PLAYER_LEFT_GAME
+    PLAYER_LEFT_GAME, GAME_DELETED, GAME_STATUS
 } from './actions';
 import {SESSION_TOKEN} from "./localStorage";
 import {CardKindEnum} from "../enumerations/CardKindEnum";
 import {IState} from "../types/IState";
+import {IGame} from "../types/IGame";
 
 const initialState = {
     lobby: {
@@ -22,16 +23,12 @@ const initialState = {
 
 
 export default function gameReducer(state: IState|undefined, action: any) {
-
-    console.log("REDUCER ACTION", action);
-    console.log("REDUCER STATE", state);
     if (typeof state === 'undefined') {
         console.log("REDUCER.INIT");
         return initialState;
     }
     switch (action.type){
         case PLAYER_SESSION_TOKEN:
-            console.log("REDUCER.LOGIN_SUCCESS", action);
             if (action.data.sessionToken) {
                 localStorage.setItem('sessionToken', action.data.sessionToken);
             }
@@ -42,15 +39,12 @@ export default function gameReducer(state: IState|undefined, action: any) {
             break;
 
         case PLAYER_JOINED_LOBBY:
-            console.log("REDUCER.PLAYER_JOINED_LOBBY");
             if (state.lobby && action.data.recipientId !== action.data.player.id) {
-                console.log("REDUCER.LOBBYOK");
                 state.lobby.players.push(action.data.player);
             }
             break;
 
         case GAME_CREATED:
-            console.log("REDUCER.GAME_CREATED");
             if (state.lobby) {
                 state.lobby.games.push(action.data.game);
             }
@@ -78,6 +72,22 @@ export default function gameReducer(state: IState|undefined, action: any) {
                 }
             }
             break;
+        case GAME_DELETED:
+            if (state.lobby) {
+                if (action.data.gameName === state.currentGameName) {
+                    state.currentGameName = "";
+                }
+                state.lobby.games.splice(state.lobby.games.findIndex(item => item.name === action.data.gameName), 1)
+            }
+            break;
+        case GAME_STATUS:
+            if (state) {
+                state.currentGameStatus = action.data
+            }
+            break;
+
+        // TODO ROUND_STARTING, PHASE_STARTING
+        // TODO Gerer le nouveau leader si leader actuel part
     }
 
     return state
