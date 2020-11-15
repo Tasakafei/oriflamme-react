@@ -4,12 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import {Provider} from "react-redux";
+import store from "./shared/web-socket/store";
+import {ToastProvider} from "react-toast-notifications";
+import WebSocketProvider from "./shared/web-socket/WebSocket";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <ToastProvider>
+                <WebSocketProvider>
+                    <App/>
+                </WebSocketProvider>
+            </ToastProvider>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

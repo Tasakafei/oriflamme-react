@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.commands {
+  margin-top: 30px
+}
+.commands Button {
+  margin: 20px
+}
+
+.fa-crown {
+  color:yellow;
+}

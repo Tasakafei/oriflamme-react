@@ -1,9 +1,15 @@
 // These are our action types
 export const LOGIN = "LOGIN";
-export const LOGIN_SUCCESS = "PLAYER_SESSION_TOKEN";
+export const PLAYER_SESSION_TOKEN = "PLAYER_SESSION_TOKEN";
 export const PLAYER_JOINED_LOBBY = "PLAYER_JOINED_LOBBY";
 export const GAME_CREATED = "GAME_CREATED";
 export const CREATE_GAME = "CREATE_GAME";
+export const JOIN_GAME = "JOIN_GAME";
+export const LEAVE_GAME = "LEAVE_GAME";
+export const PLAYER_JOINED_GAME = "PLAYER_JOINED_GAME";
+export const PLAYER_LEFT_GAME = "PLAYER_LEFT_GAME";
+export const GAME_DELETED = "GAME_DELETED";
+export const DISCONNECTED = "DISCONNECTED"
 export function loginRequest(name: string) {
     return {
         action: LOGIN,
@@ -17,6 +23,26 @@ export function createGameRequest(name: any) {
         gameName: name
     }
 }
+
+export function joinGameRequest(gameName: any) {
+    return {
+        action: JOIN_GAME,
+        gameName: gameName
+    }
+}
+export function leaveGameRequest(gameName: any) {
+    return {
+        action: LEAVE_GAME,
+        gameName: gameName
+    }
+}
+
+export function disconnectRequest() {
+    return {
+        type: DISCONNECTED,
+    }
+}
+
 
 // // Now we define actions
 // export function createRoomRequest(){
