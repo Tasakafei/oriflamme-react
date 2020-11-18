@@ -10,5 +10,6 @@ export enum CardKindEnum {
     SOLDAT = "SOLDAT",
     COMPLOT = "COMPLOT",
     SEIGNEUR = "SEIGNEUR",
-    HERITIER = "HERITIER"
+    HERITIER = "HERITIER",
+    EMPTY = ""
 }

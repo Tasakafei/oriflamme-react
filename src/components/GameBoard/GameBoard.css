@@ -10,34 +10,31 @@
 
 .hand-container {
     position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
     width: 100%;
     bottom: 0;
-    height: 25%;
+    height: 35%;
     background-color: orange;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     vertical-align: middle;
-    padding-bottom: 10px;
-}
-
-.card {
-    margin-left: 5px;
-    margin-right: 5px;
-
 }
 
 .board-container {
     position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
     width: 100%;
     top: 13%;
-    bottom: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    bottom: 35%;
     background-color: brown;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
 }
 
 .status-container {
@@ -48,24 +45,14 @@
     background-color: cornflowerblue;
 }
 
-.bg-purple {
-    background-color: purple !important;
-    color: white !important;
-}
 
-.game-card {
-    height: 100%;
-    margin-left: 5px;
-    margin-right: 5px;
-    border-radius: 5px;
-}
 
 .points-player-green {
     background-color: green;
 }
 
 .points-player-yellow {
-    background-color: yellow;
+    background-color: orange;
 }
 
 .points-player-red {
@@ -73,8 +60,8 @@
 }
 
 .points-player-black {
-    background-color: whitesmoke;
-    color: black;
+    background-color: darkcyan;
+    color: white;
 }
 
 .points-player-blue {
@@ -90,5 +77,17 @@
 }
 
 .points-player-active {
-    border: 10px double white;
+    border-bottom: 10px double white;
+}
+
+.boardcard-slot {
+    border: 5px dashed yellow;
+    width: 20px;
+    height: 100%;
+}
+.boardcard-slot:hover {
+    border: 5px dashed yellow;
+    background-color: orangered;
+    width: 20px;
+    height: 100%;
 }

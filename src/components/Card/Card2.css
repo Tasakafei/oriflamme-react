@@ -1,0 +1,32 @@
+.card-game {
+    margin-left: 5px;
+    margin-right: 5px;
+    transition: 0.15s ease-in;
+    flex: 1;
+    min-height:0;
+    min-width:0;
+}
+
+.card-game-7, .card-game-6, .card-game-5, .card-game-4, .card-game-3, .card-game-2, .card-game-1 {
+    width: 13%;
+}
+
+.card-game-8:hover {
+    width: 15%;
+    transition: 0.15s ease-in-out;
+}
+
+.card-game-8 {
+    width: 10%;
+}
+.selected {
+    transform: translate(0, -50px);
+    position: relative;
+    transition: 0.15s ease-in;
+}
+
+.card-empty {
+    background-color:yellow;
+    flex: 1;
+    height: 100%;
+}
