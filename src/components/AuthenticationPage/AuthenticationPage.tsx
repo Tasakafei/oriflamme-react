@@ -1,18 +1,21 @@
-import React, {useContext, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useContext} from "react";
+import {useSelector} from "react-redux";
 import {WebSocketContext} from "../../shared/web-socket/WebSocket";
-import {Badge, Button, Form} from "react-bootstrap";
-import {disconnectRequest} from "../../shared/web-socket/actions";
+import {Button, Form} from "react-bootstrap";
+import {useToasts} from "react-toast-notifications";
+import {SESSION_NAME} from "../../shared/web-socket/localStorage";
 
 function AuthenticationPage() {
     let usernameInput:string = "";
     // @ts-ignore
     const games = useSelector(state => state.lobby.games);
     const ws = useContext(WebSocketContext);
+    const { addToast } = useToasts();
+
     function login () {
-        console.log(usernameInput);
-        // @ts-ignore
-        ws.login(usernameInput);
+        localStorage.setItem(SESSION_NAME, usernameInput);
+        // @ts-ignore Ne peut pas être null
+        ws.login(usernameInput)
     }
 
     return (

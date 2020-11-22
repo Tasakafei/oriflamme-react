@@ -1,7 +1,7 @@
 import { WS_BASE } from "../../config";
 import { useDispatch } from "react-redux";
 import React, {createContext} from "react";
-import {SESSION_TOKEN} from "./localStorage";
+import {SESSION_NAME, SESSION_TOKEN} from "./localStorage";
 import {createGameRequest, joinGameRequest, leaveGameRequest, loginRequest, startGameRequest} from "./actions";
 import {useToasts} from "react-toast-notifications";
 
@@ -27,13 +27,20 @@ export default function ( {children}:any ) {
     let ws:any;
     const { addToast } = useToasts();
     const dispatch = useDispatch();
-    const send = (message: any) => {
+    const send = async (message: any) => {
+        if (socket.readyState != 1) {
+            await sleep(1000);
+        }
         message.sessionToken = localStorage.getItem(SESSION_TOKEN);
         console.log("EMIT EVENT:", message);
         socket.send(JSON.stringify(message));
     };
 
+    function sleep(ms:number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     const login = (username: string) => {
+
         send(loginRequest(username));
     };
     const logout = () => {
@@ -52,6 +59,7 @@ export default function ( {children}:any ) {
         send(startGameRequest(gameName))
     };
 
+
     if (!socket) {
         console.log('CONNECTING TO WS :', WS_BASE);
         socket = new WebSocket(WS_BASE);
@@ -60,12 +68,13 @@ export default function ( {children}:any ) {
         socket.onmessage = (message:any) => {
             const parsed = JSON.parse(message.data);
             console.log("ONMESSAGE:", parsed);
+            if (parsed.event)
             if (Object.keys(WARNINGS).includes(parsed.event)) {
                 // @ts-ignore
                 addToast(WARNINGS[parsed.event](parsed), {appearance: 'warning'});
             } else if (Object.keys(SYSTEM_ERRORS).includes(parsed.event)) {
                 // @ts-ignore
-                addToast(WARNINGS[parsed.event](parsed), {appearance: 'error'});
+                addToast(SYSTEM_ERRORS[parsed.event](parsed), {appearance: 'error'});
             } else {
                 dispatch({type: parsed.event, data: parsed});
             }
@@ -75,7 +84,14 @@ export default function ( {children}:any ) {
         };
         socket.onopen = (message:any) => {
             console.log("ONOPEN:", message)
+            const sessionToken = localStorage.getItem(SESSION_TOKEN);
+            const sessionName:string = localStorage.getItem(SESSION_NAME) || "";
+            console.log(socket);
+            if (sessionToken && sessionToken != "") {
+                login(sessionName);
+            }
         };
+
 
         ws = {
             socket: socket,

@@ -12,6 +12,8 @@ export const PLAYER_LEFT_GAME = "PLAYER_LEFT_GAME";
 export const GAME_DELETED = "GAME_DELETED";
 export const GAME_STATUS = "GAME_STATUS";
 export const DISCONNECTED = "DISCONNECTED";
+export const CONNECTED = "CONNECTED";
+
 export function loginRequest(name: string) {
     return {
         action: LOGIN,

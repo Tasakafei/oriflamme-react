@@ -8,6 +8,7 @@ import {ICard} from "../../shared/types/ICard";
 import {IGamePlayer} from "../../shared/types/IGamePlayer";
 import {CardKindEnum} from "../../shared/enumerations/CardKindEnum";
 import Card from "../Card/Card";
+import {timestamp} from "rxjs/operators";
 
 function GameBoard() {
     // @ts-ignore
@@ -15,6 +16,58 @@ function GameBoard() {
     // @ts-ignore
     const currentTurnPlayerName = useSelector(state => state.currentGameStatus.players.find((el: IGamePlayer) => el.id === currentGameStatus.playerTurnId).name);
     const [selected, setSelected] = useState("");
+
+    const boardTestMock = {
+        stacks: [[
+            {
+                kind: CardKindEnum.HERITIER,
+                cardId: "mock"+timestamp() ,
+                playerId: currentGameStatus.playerTurnId,
+                revealed: Math.random() <= 0.5,
+                influence: Math.round(Math.random() * 3) ,
+            },
+            {
+                kind: CardKindEnum.HERITIER,
+                cardId: "mock"+timestamp() ,
+                playerId: currentGameStatus.playerTurnId,
+                revealed: Math.random() <= 0.5,
+                influence: Math.round(Math.random() * 3) ,
+            },
+            {
+                kind: CardKindEnum.HERITIER,
+                cardId: "mock"+timestamp() ,
+                playerId: currentGameStatus.playerTurnId,
+                revealed: Math.random() <= 0.5,
+                influence: Math.round(Math.random() * 3) ,
+            }
+        ],
+            [
+                {
+                    kind: CardKindEnum.HERITIER,
+                    cardId: "mock"+timestamp() ,
+                    playerId: currentGameStatus.playerTurnId,
+                    revealed: Math.random() <= 0.5,
+                    influence: Math.round(Math.random() * 3) ,
+                },
+                {
+                    kind: CardKindEnum.HERITIER,
+                    cardId: "mock"+timestamp() ,
+                    playerId: currentGameStatus.playerTurnId,
+                    revealed: Math.random() <= 0.5,
+                    influence: Math.round(Math.random() * 3) ,
+                },
+            ],
+            [
+                {
+                    kind: CardKindEnum.HERITIER,
+                    cardId: "mock"+timestamp() ,
+                    playerId: currentGameStatus.playerTurnId,
+                    revealed: Math.random() <= 0.5,
+                    influence: Math.round(Math.random() * 3) ,
+                }
+            ],
+        ]
+    };
 
     function isActivePlayer(playerName: string) {
         return playerName === currentTurnPlayerName;
@@ -48,6 +101,15 @@ function GameBoard() {
             <div className="board-container">
                 <Row className="h-100">
                     <span className="boardcard-slot"/>
+                    {boardTestMock.stacks.map((stack:ICard[]) => {
+                        <div className="board-card-stack">
+                            {stack.map((card: ICard) => {
+                                <Card key={"boardcard" + card.cardId} isRevealed={true} onClick={selectCard} color={"yellow"}
+                                  kind={card.kind} id={card.cardId}
+                                  className={"card-game-8 " + (isSelected(card.cardId) ? "selected" : "")}/>
+                        })}
+                        </div>
+                    })}
                     {currentGameStatus.hand.map((card: ICard) =>
                         <Card key={"boardcard" + card.cardId} isRevealed={true} onClick={selectCard} color={"yellow"}
                               kind={card.kind} id={card.cardId}

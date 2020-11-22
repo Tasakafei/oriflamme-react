@@ -1,16 +1,18 @@
 import React, {Component, useContext, useState} from "react";
 import {Button, Badge, InputGroup, FormControl, Form, Col, Row} from "react-bootstrap"
-import {disconnectRequest, loginRequest} from "../../shared/web-socket/actions";
+import {disconnectRequest, joinGameRequest, loginRequest} from "../../shared/web-socket/actions";
 import WebSocketProvider, {WebSocketContext} from "../../shared/web-socket/WebSocket";
 import {useDispatch, useSelector} from "react-redux";
+import {IState} from "../../shared/types/IState";
+import {IGame} from "../../shared/types/IGame";
 
 function Lobby() {
     // @ts-ignore
     const [collapseCreation, setCollapseCreation] = useState(true);
     let gameNameCreation = "";
     // @ts-ignore
-    const games = useSelector(state => state.lobby.games);
-    const state = useSelector(state => state);
+    const games = useSelector((state:IState) => state.lobby.games);
+    const state = useSelector((state:IState) => state);
     const ws = useContext(WebSocketContext);
     const dispatch = useDispatch();
 
@@ -36,14 +38,13 @@ function Lobby() {
         setCollapseCreation(!collapseCreation);
     }
 
-
     return (
         <div className={"width-100"}>
             <h1>Lobby</h1>
 
             <div>
                 {games.map((game: any) =>
-                    <Button variant="outline-info" onClick={() => joinGame(game.name)}>{game.name} <Badge
+                    <Button variant="outline-info" key={"joinGame-"+game.name} onClick={() => joinGame(game.name)}>{game.name} <Badge
                         variant="light">{game.players.length} / {game.maxPlayers} <i
                         className="fas fa-user"/></Badge></Button>
                 )}

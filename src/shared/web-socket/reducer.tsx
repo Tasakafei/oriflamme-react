@@ -4,7 +4,7 @@ import {
     PLAYER_JOINED_GAME,
     PLAYER_JOINED_LOBBY,
     DISCONNECTED,
-    PLAYER_LEFT_GAME, GAME_DELETED, GAME_STATUS
+    PLAYER_LEFT_GAME, GAME_DELETED, GAME_STATUS, joinGameRequest
 } from './actions';
 import {SESSION_TOKEN} from "./localStorage";
 import {CardKindEnum} from "../enumerations/CardKindEnum";
@@ -36,6 +36,11 @@ export default function gameReducer(state: IState|undefined, action: any) {
             state.lobby.games = action.data.lobby.games;
             state.currentPlayerId = action.data.recipientId;
             state.sessionToken = action.data.sessionToken;
+            const currentGame:IGame[] = state.lobby.games.filter((game:IGame) => {
+                return game.players.includes(state.currentPlayerId )});
+            if ((!state.currentGameName || state.currentGameName==="") && currentGame && currentGame.length > 0) {
+                state.currentGameName=currentGame[0].name;
+            }
             break;
 
         case PLAYER_JOINED_LOBBY:
